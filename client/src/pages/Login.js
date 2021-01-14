@@ -27,6 +27,7 @@ function Login(props) {
     localStorage.setItem('email', res.profileObj.email);
     localStorage.setItem('firstName', res.profileObj.givenName);
     localStorage.setItem('lastName', res.profileObj.familyName);
+    localStorage.setItem('id_token',id_token)
 
     console.log ('profile ooo  ' + Auth.isTokenExpired(id_token));
    Auth.login(id_token);
