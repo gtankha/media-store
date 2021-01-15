@@ -54,11 +54,11 @@ const resolvers = {
     },
     Mutation: {
       addUser: async (parent, args) => {
-        if (context.user) {
+      
         const user = await User.create(args);
-       // const token = signToken(user);
-        return { user };
-        }
+        const token = signToken(user);
+        return { token};
+        
       },
       addOrder: async (parent, { products }, context) => {
         console.log(context);
