@@ -15,7 +15,9 @@ import gql from 'graphql-tag';
 export const ADD_USER = gql`
   mutation addUser($firstName: String!, $lastName: String!, $email: String!) {
     addUser(firstName: $firstName, lastName: $lastName, email: $email) {
-      token
+      user{
+        _id
+      }
     }
   }
 `;

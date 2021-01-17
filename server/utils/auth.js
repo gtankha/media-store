@@ -32,14 +32,14 @@ module.exports = {
     }
 
     return req;
-  },
-  signToken: function ({ firstName, email, _id }) {
-    const payload = { firstName, email, _id };
-
-    return jwt.sign(
-      { data: payload },
-      secret,
-      { expiresIn: expiration }
-    );
   }
+  // signToken: function ({ firstName, email, _id }) {
+  //   const payload = { firstName, email, _id };
+
+  //   return jwt.sign(
+  //     { data: payload },
+  //     secret,
+  //     { expiresIn: expiration }
+  //   );
+  // }
 };

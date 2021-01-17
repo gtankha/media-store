@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Link } from "react-router-dom";
 import { LOGIN } from "../utils/mutations"
 import Auth from "../utils/auth";
@@ -9,17 +9,19 @@ import { refreshTokenSetup } from '../utils/refreshTokenSetup';
 import { ADD_USER } from "../utils/mutations";
 
 
+
 function Login(props) {
   // const [formState, setFormState] = useState({ email: '', password: '' })
   // const [login, { error }] = useMutation(LOGIN);
   const [addUser] = useMutation(ADD_USER);
+
+
   const clientId = '900972042486-ho4224klutu5ot121jh6nao4d2tnfp8q.apps.googleusercontent.com';
+  
+
   const onSuccess = res => {
     console.log('[Login Successs] currentUser:', res.profileObj);
     var id_token = res.getAuthResponse().id_token;
-   
-  
-
     console.log(id_token);
  
   
@@ -30,16 +32,36 @@ function Login(props) {
     localStorage.setItem('id_token',id_token)
 
     console.log ('profile ooo  ' + Auth.isTokenExpired(id_token));
-   Auth.login(id_token);
+    Auth.login(id_token);
+    // console.log ('loading  :'  + loading);
 
-   const mutationResponse = addUser({
-    variables: {
-     firstName: res.profileObj.givenName, lastName: res.profileObj.familyName,  email: res.profileObj.email
-    }
-  });
+    // const myPromise = new Promise(() => {
+    //    return (users);
+    // });
+
+    // console.log (myPromise);
+    
+    // const myPromise2 = myPromise.then((result) => 
+    //  { 
+      //  console.log ('result:  ' + result);
+     
+      // let input =  {firstName: res.profileObj.givenName, lastName: res.profileObj.familyName,  email: res.profileObj.email}
+     console.log("I am here");
+      const mutationResponse = addUser({
+       variables: {firstName: res.profileObj.givenName, lastName: res.profileObj.familyName,  email: res.profileObj.email}
+    });
+    console.log("I am here again");
+   
+  
+    // })
+
+
+    // console.log (myPromise2)
     
     //refreshTokenSetup(res);
   };
+
+
 
   const onFailure = (res) => {
     console.log('{Login Failes] res:', res)
@@ -68,7 +90,7 @@ function Login(props) {
   // };
 
   return (
-    <div className="container my-1">
+    <div className="container signin">
       {/* <Link to="/signup">
         ← Go to Signup
       </Link> */}
@@ -106,16 +128,23 @@ function Login(props) {
           </button>
         </div>
       </form> */}
+      
       <GoogleLogin
         clientId={clientId}
-        buttonText="Login"
+        // render={renderProps => (
+        //   <button onClick={renderProps.onClick} disabled={renderProps.disabled}>This is my custom Google button</button>
+        // )}
+        buttonText="Google Login"
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
+        theme={'dark'}
+        icon={'true'}
+      
       />,
       {document.getElementById('googleButton')}
-
+     
     </div>
   );
 }

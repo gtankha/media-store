@@ -1,9 +1,9 @@
 import React from "react";
 import Auth from "../../utils/auth";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Route} from "react-router-dom";
 import { GoogleLogout } from 'react-google-login';
 const clientId = '900972042486-ho4224klutu5ot121jh6nao4d2tnfp8q.apps.googleusercontent.com';
-const email  = localStorage.getItem('email');
+const email = localStorage.getItem('email');
 const firstName = localStorage.getItem('firstName');
 const lastName = localStorage.getItem('lastName');
 
@@ -18,15 +18,15 @@ function Nav() {
       return (
         <ul className="flex-row">
           <li className="mx-1">
-            <Link to="/orderHistory">
+            <NavLink to="/orderHistory">
               Order History
-            </Link>
+            </NavLink>
           </li>
 
           <li className="mx-1">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
 
-          
+
             <a href="/" onClick={() => {
 
 
@@ -37,8 +37,12 @@ function Nav() {
               {email &&
                 <GoogleLogout
                   clientId={clientId}
-                  // buttonText="Logout"
-                  // onLogoutSuccess={Auth.logout()}
+                  buttonText="Logout"
+                  render={renderProps => (
+                    <div onClick={renderProps.onClick} disabled={renderProps.disabled}>Logout</div>
+                  )}
+                // onLogoutSuccess={Auth.logout()}
+                theme={'dark'}
                 >
                 </GoogleLogout>
               }
@@ -51,11 +55,16 @@ function Nav() {
         <ul className="flex-row">
           <li className="mx-1">
           </li>
-          <li className="mx-1">
-            <Link to="/login">
-              Login
-            </Link>
-          </li>
+          
+          {console.log (window.location.pathname)}
+          {((window.location.pathname !== "/login")) &&
+            <li className="mx-1">
+              <NavLink to="/login">
+                Login
+            </NavLink>
+            </li>
+          
+          }
         </ul>
       );
     }
@@ -64,10 +73,10 @@ function Nav() {
   return (
     <header className="flex-row px-1">
       <h1>
-        <Link to="/">
+        <NavLink to="/">
           <span role="img" aria-label="shopping bag">🛍️</span>
           Media Store
-        </Link>
+        </NavLink>
       </h1>
 
       <nav>

@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Product, Category, Order } = require('../models');
-const { signToken } = require('../utils/auth');
+const { findOneAndDelete, findOneAndUpdate } = require('../models/User');
+// const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -55,9 +56,41 @@ const resolvers = {
     Mutation: {
       addUser: async (parent, args) => {
       
-        const user = await User.create(args);
-        const token = signToken(user);
-        return { token};
+        console.log ('args');
+        console.log (args);
+       const isUser = await User.findOne({'email': args.email}).exec();
+       
+       console.log ('isUser');
+       console.log(isUser);
+      
+        
+       if (!isUser) {
+       const user = await User.create(args) ;
+       return {user};
+       }
+       else {
+      return (isUser);
+
+       };
+        //const token = signToken(user);
+        //  const user = await User.findOneAndUpdate (email,args, {
+        //  new: true,
+        //   upsert: true
+        // })
+
+        // const isUser = await find (args.email, async function (err,docs) {
+        //   console.log (docs);
+        //   if (!docs) {
+        //   const user = await User.create(args);
+        //   console.log ('user  '+ user);
+        //   return { user};
+        //   }
+        // })
+        //   const user = await User.findOneAndUpdate (args.email,args, {
+        //    new: true,
+        //    upsert: true
+        //  })
+
         
       },
       addOrder: async (parent, { products }, context) => {
