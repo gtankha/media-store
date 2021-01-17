@@ -39,7 +39,7 @@ function Nav() {
                   clientId={clientId}
                   buttonText="Logout"
                   render={renderProps => (
-                    <a href onClick={renderProps.onClick} disabled={renderProps.disabled}>Logout</a>
+                    <div onClick={renderProps.onClick} disabled={renderProps.disabled}>Logout</div>
                   )}
                 // onLogoutSuccess={Auth.logout()}
                 theme={'dark'}
