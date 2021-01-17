@@ -164,6 +164,13 @@ input:focus {
   margin-left: var(--spacing-two);
 }
 
+.signin {
+  margin-top: 20%;
+  margin-bottom: var(--spacing-one);
+  margin-right: var(--spacing-two);
+  margin-left: 40%;
+}
+
 .my-1 {
   margin-top: var(--spacing-one);
   margin-bottom: var(--spacing-one);
