@@ -43,7 +43,7 @@ db.once('open', async () => {
       name: 'HALO: Shadows of Reach (book)',
       description:
         'A Master Chief story and original full-length novel set in the Halo universe - based on the New York Times best-selling video game series!',
-      image: 'haloShodowOfReach.jpg',
+      image: 'haloShadowsOfReach.jpg',
       category: categories[1]._id,
       price: 13.99
     },
@@ -84,7 +84,7 @@ db.once('open', async () => {
       name: `Assassin's Creed Odyssey (PS4)`,
       description:
         `Write your own legendary Odyssey and live epic adventures in a world where every choice matters. Sentenced to death by your family, embark on an epic journey from outcast mercenary to legendary Greek hero, and uncover the truth about your past. Forge your path through a war-torn world shaped by gods and men, where mountains and sea collide. Meet Ancient Greece's famous figures and interact with them during a pivotal point in history that shaped western civilization.`,
-        image: 'assassinCreedOdyssey.jpg',
+        image: `assassinsCreedOdyssey.jpg`,
         category: categories[2]._id,
       price: 25.99 
     },
@@ -101,7 +101,7 @@ db.once('open', async () => {
       description:
         `Use hacking as a weapon in the massive & dynamic open world of Watch Dogs 2.
         Play as Marcus Holloway, a brilliant young hacker living in the birthplace of the tech revolution, the San Francisco Bay Area. Team up with Dedsec, a notorious group of hackers, and expose the hidden dangers of ctOS 2.0, which, in the hands of corrupt corporations, is being wrongfully used to monitor and manipulate citizens on a massive scale.`,
-        image: 'watchDog2.jpg',
+        image: 'watchDogs2.jpg',
         category: categories[2]._id,
       price: 21.90 
     },

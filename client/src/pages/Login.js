@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { Link } from "react-router-dom";
-import { LOGIN } from "../utils/mutations"
+//import { Link } from "react-router-dom";
+//import { LOGIN } from "../utils/mutations"
 import Auth from "../utils/auth";
 import { GoogleLogin } from 'react-google-login';
 // refresh token
