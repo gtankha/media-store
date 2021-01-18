@@ -1,5 +1,12 @@
 import styled, { css } from 'styled-components'
-import Nav from '../nav'
+import { Link, NavLink, Route} from "react-router-dom";
+import Nav from '../Nav'
+import { UPDATE_CATEGORIES } from '../../utils/actions';
+import { QUERY_CATEGORIES } from '../../utils/queries';
+import { useQuery } from '@apollo/react-hooks';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { idbPromise } from "../../utils/helpers";
 
 function Header () {
 
@@ -37,7 +44,7 @@ function Header () {
     cursor:pointer;
     text-align: center;
 
-    `
+    `;
     const Select = styled.select`
     width:80px;
     height:26px;
@@ -46,15 +53,53 @@ function Header () {
     margin-left:20px;
     padding-left:5px;
     outline: none;
-    `
+    `;
+
+    const state = useSelector((state) => {
+        return state
+    });
+    const dispatch = useDispatch();
+
+    const { currentCategory } = state;
+
+    const { loading, data } = useQuery(QUERY_CATEGORIES);
+
+
+    useEffect(() => {
+        if(data) {
+            console.log(data.categories)
+          dispatch({
+            type: UPDATE_CATEGORIES,
+            categories: data.categories
+          });
+      
+          data.categories.forEach((category) => {
+            idbPromise('categories', 'put', category);
+          });
+          // add else if to check if `loading` is undefined in `useQuery()` Hook
+        } else if (!loading) {
+          // since we're offline, get all of the data from the `products` store
+          idbPromise('categories', 'get').then((categories) => {
+            // use retrieved data to set global state for offline browsing
+            dispatch({
+              type: UPDATE_CATEGORIES,
+              categories: categories
+            });
+          });
+        }
+      }, [data, loading, dispatch]);
 
     return (
         <Container>
-        <H1>Media Store</H1>
+        <NavLink to="/">
+        <span role="img" aria-label="shopping bag">🛍️</span>
+        Media Store
+        </NavLink>
         <Select>
-        <option value="Movies">Movies</option>
-        <option value="Games">Games</option>
-        <option value="Books">Books</option>
+        {state.categories.map(category=> ( 
+            <option key={category._id} value={category._id}>{category.name}</option>
+
+        ))}
         </Select>
         <Input></Input>
         <SearchBtn className="fa">&#xf002;</SearchBtn>

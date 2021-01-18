@@ -1,5 +1,14 @@
 import gql from 'graphql-tag';
 
+export const QUERY_CATEGORIES = gql`
+query categories {
+  
+    categories{
+        _id
+      name
+    }
+  }`;
+
 
 export const QUERY_PRODUCTS = gql`
 query products($category: ID, $name: String){
