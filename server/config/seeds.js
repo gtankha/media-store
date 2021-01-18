@@ -76,7 +76,7 @@ db.once('open', async () => {
       description:
         `Ancient Egypt – home of colossal pyramids, gilded tombs, tyrannical god-kings, and the origin story of the Assassins.
          As Cleopatra’s empire crumbles, the birth of the Assassin's Brotherhood will lead to an extraordinary shift of the world order. Along your journey, the mysteries of Ancient Egypt will be revealed.`,
-      image: 'assassinCreedOrigins.jpg',
+      image: 'assasinCreedOrigins.jpg',
       category: categories[2]._id,
       price: 22.72 
     },
