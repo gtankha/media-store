@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Nav from "./components/Nav";
+import store from "./redux/store";
 // import OrderHistory from "./pages/OrderHistory";
 // import Success from "./pages/Success"
 // import store from '../src/utils/store';
@@ -31,7 +32,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          {/* <Provider store={store}> */}
+           <Provider store={store}> 
             <Nav /> 
             <Switch>
               <Route exact path="/" component={Home} />
@@ -39,7 +40,7 @@ function App() {
               <Route exact path="/signup" component={Signup} />
               {/* <Route component={NoMatch} /> */}
             </Switch>
-          {/* </Provider> */}
+           </Provider> 
         </div>
       </Router>
     </ApolloProvider>
