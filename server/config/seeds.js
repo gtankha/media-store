@@ -43,7 +43,7 @@ db.once('open', async () => {
       name: 'HALO: Shadows of Reach (book)',
       description:
         'A Master Chief story and original full-length novel set in the Halo universe - based on the New York Times best-selling video game series!',
-      image: 'haloShadowsOfReach.jpg',
+      image: `haloShadowsOfReach.jpg`,
       category: categories[1]._id,
       price: 13.99
     },
