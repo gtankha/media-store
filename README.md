@@ -15,7 +15,7 @@
  - [Contributing](#contributing)
  - [Deployment URL](#Deployment-URL)
  - [GitHub Repo URL](#GitHub-Repo-URL)
- - [Author](#author)
+ - [Authors](#authors)
  - [Tests](#tests)
  - [Questions](#questions)
 
@@ -60,7 +60,7 @@ https://github.com/gtankha/media-store
 ## Contributing
   Please feel free to contribute. However, please send a note to the email address below informing us of the contribution
 
-## Test
+## Tests
   Validation is perfomed to ensure that data is not empty. Additionally, only authenticated users can access functions such as shopping cart and payments
 
 ## Questions
