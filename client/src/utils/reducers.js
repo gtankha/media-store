@@ -4,6 +4,7 @@ import {
     UPDATE_PRODUCTS,
     UPDATE_CATEGORIES,
     UPDATE_CURRENT_CATEGORY,
+    UPDATE_CURRENT_SEARCH,
     ADD_TO_CART,
     ADD_MULTIPLE_TO_CART,
     REMOVE_FROM_CART,
@@ -17,7 +18,8 @@ const initial = {
     products: [],
     cart: [],
     categories: [],
-    currentCategory: ''
+    currentCategory: '',
+    currentSearch:''
   };
 
 
@@ -41,6 +43,11 @@ export const reducer = (state=initial, action) => {
                 ...state,
                 currentCategory: action.currentCategory
             };
+        case UPDATE_CURRENT_SEARCH:
+                return {
+                    ...state,
+                    currentSearch: action.currentSearch
+                };
         case ADD_TO_CART:
             return {
                 ...state,

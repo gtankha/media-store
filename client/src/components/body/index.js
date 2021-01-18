@@ -14,11 +14,11 @@ function Body() {
     });
     const dispatch = useDispatch();
 
-    const { currentCategory } = state;
+    const { currentCategory,currentSearch } = state;
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-
+    
     useEffect(() => {
         if(data) {
           dispatch({
@@ -45,11 +45,17 @@ function Body() {
 
     function filterProducts() {
         console.log("state",state)
-        if (!currentCategory) {
-            return state.products;
-        }
+        console.log("current category",currentCategory)
+        // if (!currentCategory) {
+        //     return state.products;
+        // }
 
-        return state.products.filter(product => product.category._id === currentCategory);
+        let products = state.products;
+
+        if(currentCategory) products = products.filter(product => product.category._id === currentCategory);
+        if(currentSearch) products = products.filter(product => product.name.toLowerCase().includes(currentSearch.toLowerCase()));
+
+        return products
     }
 
     const Container = styled.div`

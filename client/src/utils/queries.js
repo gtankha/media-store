@@ -20,6 +20,10 @@ query products($category: ID, $name: String){
             description
             image
             price
+            category {
+              _id
+              name
+            }
         
     
     }

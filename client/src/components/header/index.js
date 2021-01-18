@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Link, NavLink, Route} from "react-router-dom";
 import Nav from '../Nav'
-import { UPDATE_CATEGORIES } from '../../utils/actions';
+import { UPDATE_CATEGORIES,UPDATE_CURRENT_CATEGORY,UPDATE_CURRENT_SEARCH } from '../../utils/actions';
 import { QUERY_CATEGORIES } from '../../utils/queries';
 import { useQuery } from '@apollo/react-hooks';
 import React, { useEffect } from 'react';
@@ -60,9 +60,31 @@ function Header () {
     });
     const dispatch = useDispatch();
 
-    const { currentCategory } = state;
+    const { currentCategory,currentSearch } = state;
 
     const { loading, data } = useQuery(QUERY_CATEGORIES);
+
+    const SelectCategory = function (event) {
+
+        console.log(event.target.value);
+        const _id = event.target.value;
+
+        dispatch({
+          type: UPDATE_CURRENT_CATEGORY,
+          currentCategory: _id
+        });
+
+    }
+
+    const Search = function (event) {
+
+      const mySearch = document.querySelector("#searchInput").value;
+      
+      dispatch({
+        type: UPDATE_CURRENT_SEARCH,
+        currentSearch: mySearch
+      });
+    }
 
 
     useEffect(() => {
@@ -95,14 +117,15 @@ function Header () {
         <span role="img" aria-label="shopping bag">🛍️</span>
         Media Store
         </NavLink>
-        <Select>
+        <Select onChange={SelectCategory} value={ currentCategory }>
         {state.categories.map(category=> ( 
             <option key={category._id} value={category._id}>{category.name}</option>
 
         ))}
+        <option key="all123" value="">All</option>
         </Select>
-        <Input></Input>
-        <SearchBtn className="fa">&#xf002;</SearchBtn>
+        <Input id="searchInput"></Input>
+        <SearchBtn onClick={Search} className="fa">&#xf002;</SearchBtn>
         <Nav/>
         </Container> 
 

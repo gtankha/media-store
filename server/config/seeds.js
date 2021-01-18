@@ -129,28 +129,5 @@ db.once('open', async () => {
 
   console.log('products seeded');
 
-  // await User.deleteMany();
-
-  // await User.create({
-  //   firstName: 'Marco',
-  //   lastName: 'Evangelista',
-  //   email: 'marco@testmail.com',
-  //   password: 'password12345',
-  //   orders: [
-  //     {
-  //       products: [products[0]._id, products[0]._id, products[1]._id]
-  //     }
-  //   ]
-  // });
-
-  // await User.create({
-  //   firstName: 'Gautam',
-  //   lastName: 'Tankha',
-  //   email: 'gautam@testmail.com',
-  //   password: 'password12345'
-  // });
-
-  // console.log('users seeded');
-
   process.exit();
 });

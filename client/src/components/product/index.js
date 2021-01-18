@@ -6,6 +6,8 @@ function Product(prop)
 {
     const {image,title,price,description} = prop;
 
+    const minBid=Math.ceil(price/3);
+
     const Container = styled.div`
     width:1000px;
     height:200px;
@@ -100,7 +102,7 @@ function Product(prop)
             <Card>
             <CardHead>
             <h5><b>{title}</b></h5><H3><b>${price}</b></H3><BuyBtn>Buy Now</BuyBtn><H4><span className="fa">&#xf201;</span> </H4>
-            <BidBtn>Bid</BidBtn><Input placeholder='$21' step='1' min="21"></Input><ViewBtn>Expand Item</ViewBtn>
+            <BidBtn>Bid</BidBtn><Input placeholder={"$"+minBid.toString()} step='1' min={minBid}></Input><ViewBtn>Expand Item</ViewBtn>
             
             </CardHead>
             <CardBody>
