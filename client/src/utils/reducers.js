@@ -61,12 +61,12 @@ export const reducer = (state=initial, action) => {
             };
         case REMOVE_FROM_CART:
             let newState = state.cart.filter(product => {
+                console.log("action id",action._id)
                 return product._id !== action._id;
             });
-
+            console.log("newState",newState)
             return {
                 ...state,
-                cartOpen: newState.length > 0,
                 cart: newState
             };
         case UPDATE_CART_QUANTITY:

@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 //import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Cart from "./pages/Cart";
 import Header from "./components/header";
 import store from "./redux/store";
 // import OrderHistory from "./pages/OrderHistory";
@@ -38,6 +39,7 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
+              <Route exact path="/cart" component={Cart} />
               {/* <Route component={NoMatch} /> */}
             </Switch>
            </Provider> 

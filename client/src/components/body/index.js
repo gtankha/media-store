@@ -46,9 +46,6 @@ function Body() {
     function filterProducts() {
         console.log("state",state)
         console.log("current category",currentCategory)
-        // if (!currentCategory) {
-        //     return state.products;
-        // }
 
         let products = state.products;
 
@@ -65,15 +62,24 @@ function Body() {
     margin-top:50px;
     `;
 
+    const Wrapper = styled.div`
+    display:flex;
+    justify-content: center;
+    `;
+
     return (
+
+      <Wrapper>
 
         <Container>
             {filterProducts().map(product => (
-                <Product image={product.image} title={product.name} price={product.price} key={product._id}
-                    description={product.description}
+                <Product _id={product._id} image={product.image} title={product.name} price={product.price} key={product._id}
+                    description={product.description} cart="no"
                 />
             ))}
         </Container>
+
+        </Wrapper>
     )
 }
 

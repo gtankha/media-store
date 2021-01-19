@@ -1,16 +1,43 @@
 import styled, { css } from 'styled-components'
-import {shortDescription} from '../../utils/helpers'
-import React, { Component }  from 'react';
+import { shortDescription } from '../../utils/helpers'
+import { ADD_TO_CART,REMOVE_FROM_CART } from '../../utils/actions'
+import { useDispatch } from 'react-redux';
+import React, { Component } from 'react';
 
-function Product(prop)
-{
-    const {image,title,price,description} = prop;
+function Product(prop) {
+    const { _id, image, title, price, description, cart } = prop;
 
-    const minBid=Math.ceil(price/3);
+    const dispatch = useDispatch();
+
+    const minBid = Math.ceil(price / 3);
+
+    const addToCart = function () {
+        dispatch({
+            type: ADD_TO_CART,
+            product: {
+                _id: _id,
+                image: image,
+                title: title,
+                price: price,
+                description: description
+            }
+        });
+
+    }
+
+    const removeFromCart = function () {
+
+        dispatch({
+            type: REMOVE_FROM_CART,
+            _id: _id
+        });
+
+
+    }
 
     const Container = styled.div`
     width:1000px;
-    height:200px;
+    height:220px;
     padding:5px;
     display:flex;
     justify-content:space-between;
@@ -60,6 +87,8 @@ function Product(prop)
     white-space: nowrap;
     `;
 
+    const DelBtn = BuyBtn;
+
     const BidBtn = styled.button`
     font-size:16px;
     border-radius: 20px;
@@ -95,23 +124,45 @@ function Product(prop)
     text-align:center;
     `;
 
-    return (
-        <Container>
-            
-            <Img/>
-            <Card>
-            <CardHead>
-            <h5><b>{title}</b></h5><H3><b>${price}</b></H3><BuyBtn>Buy Now</BuyBtn><H4><span className="fa">&#xf201;</span> </H4>
-            <BidBtn>Bid</BidBtn><Input placeholder={"$"+minBid.toString()} step='1' min={minBid}></Input><ViewBtn>Expand Item</ViewBtn>
-            
-            </CardHead>
-            <CardBody>
-            <p>{shortDescription(description)}</p>
-            </CardBody>
-            </Card>
+    if (cart === "no") {
+        return (
+            <Container>
 
-        </Container>
-    )
+                <Img />
+                <Card>
+                    <CardHead>
+                        <h5><b>{title}</b></h5><H3><b>${price}</b></H3><BuyBtn onClick={addToCart}>Buy Now</BuyBtn><H4><span className="fa">&#xf201;</span> </H4>
+                        <BidBtn>Bid</BidBtn><Input placeholder={"$" + minBid.toString()} step='1' min={minBid}></Input><ViewBtn>Expand Item</ViewBtn>
+
+                    </CardHead>
+                    <CardBody>
+                        <p>{shortDescription(description)}</p>
+                    </CardBody>
+                </Card>
+
+            </Container>
+
+        )
+    }
+    if (cart === "yes") {
+
+        return (
+            <Container>
+
+                <Img />
+                <Card>
+                    <CardHead>
+                        <h5><b>{title}</b></h5><H3><b>${price}</b></H3><DelBtn onClick={removeFromCart}>Remove</DelBtn>
+                    </CardHead>
+                    <CardBody>
+                        <p>{shortDescription(description)}</p>
+                    </CardBody>
+                </Card>
+
+            </Container>
+
+        )
+    }
 }
 
 export default Product;

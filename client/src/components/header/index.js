@@ -15,10 +15,10 @@ function Header () {
     margin-left: 30px;
     `;
     const Input = styled.input`
-    width: 45%;
+    width: 55%;
     height: 24px;
     font-size:18px;
-    border: 1px solid black;
+    border: 0px;
     border-right:0px; 
     border-left:0px; 
     padding:0 10px;
@@ -30,15 +30,14 @@ function Header () {
     height:30px;
     width:100%;
     align-items:center;
+    justify-content:space-between;
     border-bottom: 1px solid #888;
     `;
     const SearchBtn = styled.div`
     padding-top:3px;
     font-size:18px;
     background-color: #FDB515;
-    border: 1px solid #000;
     border-left:0px;
-    height:22px;
     width: 50px;
     border-radius: 0 20px 20px 0;
     cursor:pointer;
@@ -48,11 +47,18 @@ function Header () {
     const Select = styled.select`
     width:80px;
     height:26px;
-    border-radius: 20px 0 0 20px;
-    border-right:0px;
+    border:0px;
     margin-left:20px;
     padding-left:5px;
     outline: none;
+    `;
+
+    const WrapBar = styled.div`
+    border:1px solid #000;
+    width: 55%;
+    border-radius: 20px 20px;
+    display:flex;
+    justify-content:space-between;
     `;
 
     const state = useSelector((state) => {
@@ -79,7 +85,7 @@ function Header () {
     const Search = function (event) {
 
       const mySearch = document.querySelector("#searchInput").value;
-      
+
       dispatch({
         type: UPDATE_CURRENT_SEARCH,
         currentSearch: mySearch
@@ -117,6 +123,7 @@ function Header () {
         <span role="img" aria-label="shopping bag">🛍️</span>
         Media Store
         </NavLink>
+        <WrapBar>
         <Select onChange={SelectCategory} value={ currentCategory }>
         {state.categories.map(category=> ( 
             <option key={category._id} value={category._id}>{category.name}</option>
@@ -126,6 +133,7 @@ function Header () {
         </Select>
         <Input id="searchInput"></Input>
         <SearchBtn onClick={Search} className="fa">&#xf002;</SearchBtn>
+        </WrapBar>
         <Nav/>
         </Container> 
 
