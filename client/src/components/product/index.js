@@ -31,16 +31,18 @@ function Product(prop) {
       
         const now = moment();
         timeLeft = moment.duration(now.diff(m));
+        const expire = Math.floor(120 - timeLeft.asSeconds());
 
-        if(timeLeft > 0)
+        if(expire <=0)
         {
-        document.querySelector("#remainingTime"+_id).textContent = "Sold!";
+        if(document.querySelector("#remainingTime"+_id)) document.querySelector("#remainingTime"+_id).textContent = "Sold!";
+     
         return;
         }
        
 
-        const expire = Math.floor(120 - timeLeft.asSeconds());
-        document.querySelector("#remainingTime"+_id).textContent = hhmmss(expire);
+       
+        if(document.querySelector("#remainingTime"+_id)) document.querySelector("#remainingTime"+_id).textContent = hhmmss(expire);
     }
 
     function pad(num) {
@@ -90,6 +92,8 @@ function Product(prop) {
 
 
          mutationResponse ();
+
+         window.location.reload();
         
     }
 

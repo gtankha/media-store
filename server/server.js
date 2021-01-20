@@ -5,7 +5,7 @@ let   moment = require('moment'); // require
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
-const {Product} = require("./models")
+const {Product,User} = require("./models")
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -30,15 +30,56 @@ db.once('open', () => {
 });
 
 var CronJob = require('cron').CronJob;
-var job = new CronJob('0 */1 * * * *', function() {
+var job = new CronJob('*/15 * * * * *', function() {
   console.log('You will see this message every minute',moment().format());
+  Find();
 }, null, true, 'America/Los_Angeles');
 job.start();
 
-async function Find(){
-  const filter = { _id:"600779a81ea0905bf116730b"};
-  const doc = await Product.findOne(filter);
-  console.log(doc)
+ function Find(){
+ 
+   Product.find()
+   .then(data=>{
+   
+   const auctions = data.filter(product => {return product.bidTimeStamp != null} )
+   auctions.forEach(prod => {
+
+   const now = moment(); //todays date
+   const m = moment(prod.bidTimeStamp).format(); // another date
+   const duration = moment.duration(now.diff(m));
+
+   const expire = Math.floor(120 - duration.asSeconds());
+
+   if(expire <=0){
+
+    console.log("id",prod._id);
+
+    const message = `You won the action for ${prod.name} on ${moment(prod.bidTimeStamp).format('MMMM Do YYYY, h:mm:ss a')}`
+    User.findOneAndUpdate({email:prod.bidderId}, { "$push": { "messages": message } },
+    function (err, raw) {
+        if (err) return handleError(err);
+        console.log('The raw response from Mongo was ', raw);
+    })
+
+    
+    Product.findOneAndDelete({_id:prod._id}, function (err, docs) { 
+    if (err){ 
+        console.log(err) 
+    } 
+    else{ 
+        console.log("Deleted User : ", docs); 
+    } })
+    .then(data => console.log(data))
+    .catch(err=> console.log(err))
+   }
+
+   
+
+   console.log("bidTimeStamp",now.format(),m,prod.bidTimeStamp,duration.asSeconds());
+
+   })
+   
+   })
 }
 
 
