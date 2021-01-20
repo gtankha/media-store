@@ -14,6 +14,10 @@ const typeDefs = gql`
     quantity: Int
     price: Float
     category: Category
+    bidderId: String
+    bidderName: String
+    bidValue: Float
+    bidTimeStamp: String
   }
 
   type Order {
@@ -46,7 +50,7 @@ const typeDefs = gql`
     addUser(firstName: String!, lastName: String!, email: String!): Auth
     addOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
+    updateProduct(_id: ID!, value: Float!, bidderId:String! , bidderName:String! , bidTimeStamp:String! ): Product
  
   }
 `;

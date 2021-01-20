@@ -10,19 +10,17 @@ import { idbPromise } from "../../utils/helpers";
 
 function Header () {
 
-
     const H1 = styled.h1 `
     margin-left: 30px;
     `;
     const Input = styled.input`
     width: 55%;
-    height: 24px;
+    height: 100%;
     font-size:18px;
     border: 0px;
     border-right:0px; 
     border-left:0px; 
-    padding:0 10px;
-    outline: none;
+    outline:0px;
     `;
     const Container = styled.div`
     padding: 20px;
@@ -72,8 +70,13 @@ function Header () {
 
     const SelectCategory = function (event) {
 
-        console.log(event.target.value);
+        const mySearch = document.querySelector("#searchInput").value;
         const _id = event.target.value;
+
+        dispatch({
+          type: UPDATE_CURRENT_SEARCH,
+          currentSearch: mySearch
+        });
 
         dispatch({
           type: UPDATE_CURRENT_CATEGORY,
@@ -85,6 +88,7 @@ function Header () {
     const Search = function (event) {
 
       const mySearch = document.querySelector("#searchInput").value;
+      console.log("mySearch",mySearch)
 
       dispatch({
         type: UPDATE_CURRENT_SEARCH,
@@ -131,10 +135,11 @@ function Header () {
         ))}
         <option key="all123" value="">All</option>
         </Select>
-        <Input id="searchInput"></Input>
+        <Input id="searchInput" defaultValue={currentSearch}></Input>
         <SearchBtn onClick={Search} className="fa">&#xf002;</SearchBtn>
         </WrapBar>
         <Nav/>
+       
         </Container> 
 
     );

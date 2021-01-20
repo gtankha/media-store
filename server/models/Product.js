@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
@@ -23,6 +22,26 @@ const productSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Category',
     required: true
+  },
+  bidderId: {
+    type: String,
+    required:false,
+    trim:true
+  },
+  bidderName: {
+    type: String,
+    required:false,
+    trim:true
+  },
+  bidValue: {
+    type: Number,
+    required:false,
+    trim:true
+  },
+  bidTimeStamp: {
+    type: String,
+    required:false,
+    trim:true
   }
 });
 

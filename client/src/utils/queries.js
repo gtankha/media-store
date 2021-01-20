@@ -20,6 +20,9 @@ query products($category: ID, $name: String){
             description
             image
             price
+            bidderName
+            bidValue
+            bidTimeStamp
             category {
               _id
               name

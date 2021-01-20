@@ -72,25 +72,6 @@ const resolvers = {
       return (isUser);
 
        };
-        //const token = signToken(user);
-        //  const user = await User.findOneAndUpdate (email,args, {
-        //  new: true,
-        //   upsert: true
-        // })
-
-        // const isUser = await find (args.email, async function (err,docs) {
-        //   console.log (docs);
-        //   if (!docs) {
-        //   const user = await User.create(args);
-        //   console.log ('user  '+ user);
-        //   return { user};
-        //   }
-        // })
-        //   const user = await User.findOneAndUpdate (args.email,args, {
-        //    new: true,
-        //    upsert: true
-        //  })
-
         
       },
       addOrder: async (parent, { products }, context) => {
@@ -112,10 +93,35 @@ const resolvers = {
   
         throw new AuthenticationError('Not logged in');
       },
-      updateProduct: async (parent, { _id, quantity }) => {
-        const decrement = Math.abs(quantity) * -1;
-  
-        return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+      updateProduct: async (parent, { _id, value, bidderId, bidderName, bidTimeStamp }) => {
+
+        // console.log("here")
+        // Product.findOne({_id:_id})
+        // .then(data => {
+          
+        //   console.log(data)
+        //   if(data.bid)
+        //   {
+        //     console.log(data.bid.value,value)
+        //     if(value > data.bid.value) {
+        //       const filter = { _id: _id };
+        //     const update = { bid:{value:value,name:"my name",_id:"q124"} };
+
+        //      Product.findOneAndUpdate(filter, update, {
+        //       new: true
+        //     })
+        //     .then(newdata => {  return newdata})
+        //     .catch(err => {console.log(err)})
+        //     }
+        //   }
+        
+        // }
+          
+        //   )
+        
+      return await Product.findOneAndUpdate({_id:_id,bidValue:{$lt:value}},{bidValue:value,bidTimeStamp:bidTimeStamp,bidderName:bidderName,bidderId:bidderId}, { returnOriginal:false });
+
+       // return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
       }
       // login: async (parent, { email, password }) => {
       //   const user = await User.findOne({ email });

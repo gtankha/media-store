@@ -33,6 +33,7 @@ function Nav() {
       console.log(email);
       console.log(firstName);
       console.log(lastName);
+     // console.log(Auth.getProfile())
       return (
         <UL className="flex-row">
           <li className="mx-1">

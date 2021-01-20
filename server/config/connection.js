@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/media-store', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/media-store4', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

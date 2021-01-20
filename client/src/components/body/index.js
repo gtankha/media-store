@@ -73,8 +73,8 @@ function Body() {
 
         <Container>
             {filterProducts().map(product => (
-                <Product _id={product._id} image={product.image} title={product.name} price={product.price} key={product._id}
-                    description={product.description} cart="no"
+                <Product _id={product._id} image={product.image} title={product.name} price={product.price} key={product._id} bidValue={product.bidValue}
+                    description={product.description} bidderName={product.bidderName} bidTimeStamp={product.bidTimeStamp} cart="no"
                 />
             ))}
         </Container>
