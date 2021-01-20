@@ -76,7 +76,7 @@ db.once('open', async () => {
       description:
         `Ancient Egypt – home of colossal pyramids, gilded tombs, tyrannical god-kings, and the origin story of the Assassins.
          As Cleopatra’s empire crumbles, the birth of the Assassin's Brotherhood will lead to an extraordinary shift of the world order. Along your journey, the mysteries of Ancient Egypt will be revealed.`,
-      image: 'assasinCreedOrigins.jpg',
+      image: 'assassinCreedOrigins.jpg',
       category: categories[2]._id,
       price: 22.72 
     },
@@ -84,7 +84,7 @@ db.once('open', async () => {
       name: `Assassin's Creed Odyssey (PS4)`,
       description:
         `Write your own legendary Odyssey and live epic adventures in a world where every choice matters. Sentenced to death by your family, embark on an epic journey from outcast mercenary to legendary Greek hero, and uncover the truth about your past. Forge your path through a war-torn world shaped by gods and men, where mountains and sea collide. Meet Ancient Greece's famous figures and interact with them during a pivotal point in history that shaped western civilization.`,
-        image: `assassinsCreedOdyssey.jpg`,
+        image: `assassinCreedOdyssey.jpg`,
         category: categories[2]._id,
       price: 25.99 
     },

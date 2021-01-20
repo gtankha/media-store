@@ -13,7 +13,6 @@ import Header from "./components/header";
 import store from "./redux/store";
 // import OrderHistory from "./pages/OrderHistory";
 // import Success from "./pages/Success"
-//import store from '../src/redux/store';
 
 const client = new ApolloClient({
   request: (operation) => {
