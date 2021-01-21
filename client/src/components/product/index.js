@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment'
 import {UPDATE_BID} from '../../utils/mutations';
 import React, { Component } from 'react';
-
+//test
 function Product(prop) {
     const { _id, image, title, price, description, cart, bidTimeStamp, bidValue, bidderName } = prop;
 
