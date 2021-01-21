@@ -30,6 +30,18 @@ db.once('open', () => {
 });
 
 
+// Serve up static assets
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
+}
+
+
+
+
 var CronJob = require('cron').CronJob;
 var job = new CronJob('*/15 * * * * *', function() {
   console.log('You will see this message every minute',moment().format());

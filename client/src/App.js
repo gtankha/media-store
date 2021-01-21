@@ -15,6 +15,8 @@ import store from "./redux/store";
 // import Success from "./pages/Success"
 // import store from '../src/utils/store';
 
+
+
 const client = new ApolloClient({
   request: (operation) => {
     const token = localStorage.getItem('id_token')
@@ -24,7 +26,7 @@ const client = new ApolloClient({
       }
     })
   },
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 })
 
 
@@ -36,10 +38,10 @@ function App() {
            <Provider store={store}> 
             <Header /> 
             <Switch>
-              <Route path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/cart" component={Cart} />
+              <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/cart" component={Cart} />
             </Switch>
            </Provider> 
         </div>
