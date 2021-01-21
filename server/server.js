@@ -29,58 +29,59 @@ db.once('open', () => {
   });
 });
 
-var CronJob = require('cron').CronJob;
-var job = new CronJob('*/15 * * * * *', function() {
-  console.log('You will see this message every minute',moment().format());
-  Find();
-}, null, true, 'America/Los_Angeles');
-job.start();
 
- function Find(){
+// var CronJob = require('cron').CronJob;
+// var job = new CronJob('*/15 * * * * *', function() {
+//   console.log('You will see this message every minute',moment().format());
+//   Find();
+// }, null, true, 'America/Los_Angeles');
+// job.start();
+
+//  function Find(){
  
-   Product.find()
-   .then(data=>{
+//    Product.find()
+//    .then(data=>{
    
-   const auctions = data.filter(product => {return product.bidTimeStamp != null} )
-   auctions.forEach(prod => {
+//    const auctions = data.filter(product => {return product.bidTimeStamp != null} )
+//    auctions.forEach(prod => {
 
-   const now = moment(); //todays date
-   const m = moment(prod.bidTimeStamp).format(); // another date
-   const duration = moment.duration(now.diff(m));
+//    const now = moment(); //todays date
+//    const m = moment(prod.bidTimeStamp).format(); // another date
+//    const duration = moment.duration(now.diff(m));
 
-   const expire = Math.floor(120 - duration.asSeconds());
+//    const expire = Math.floor(120 - duration.asSeconds());
 
-   if(expire <=0){
+//    if(expire <=0){
 
-    console.log("id",prod._id);
+//     console.log("id",prod._id);
 
-    const message = `You won the action for ${prod.name} on ${moment(prod.bidTimeStamp).format('MMMM Do YYYY, h:mm:ss a')}`
-    User.findOneAndUpdate({email:prod.bidderId}, { "$push": { "messages": message } },
-    function (err, raw) {
-        if (err) return handleError(err);
-        console.log('The raw response from Mongo was ', raw);
-    })
+//     const message = `You won the action for ${prod.name} on ${moment(prod.bidTimeStamp).format('MMMM Do YYYY, h:mm:ss a')}`
+//     User.findOneAndUpdate({email:prod.bidderId}, { "$push": { "messages": message } },
+//     function (err, raw) {
+//         if (err) return handleError(err);
+//         console.log('The raw response from Mongo was ', raw);
+//     })
 
     
-    Product.findOneAndDelete({_id:prod._id}, function (err, docs) { 
-    if (err){ 
-        console.log(err) 
-    } 
-    else{ 
-        console.log("Deleted User : ", docs); 
-    } })
-    .then(data => console.log(data))
-    .catch(err=> console.log(err))
-   }
+//     Product.findOneAndDelete({_id:prod._id}, function (err, docs) { 
+//     if (err){ 
+//         console.log(err) 
+//     } 
+//     else{ 
+//         console.log("Deleted User : ", docs); 
+//     } })
+//     .then(data => console.log(data))
+//     .catch(err=> console.log(err))
+//    }
 
    
 
-   console.log("bidTimeStamp",now.format(),m,prod.bidTimeStamp,duration.asSeconds());
+//    console.log("bidTimeStamp",now.format(),m,prod.bidTimeStamp,duration.asSeconds());
 
-   })
+//    })
    
-   })
-}
+//    })
+// }
 
 
 
