@@ -36,11 +36,10 @@ function App() {
            <Provider store={store}> 
             <Header /> 
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/cart" component={Cart} />
-              {/* <Route component={NoMatch} /> */}
+              <Route path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/cart" component={Cart} />
             </Switch>
            </Provider> 
         </div>
