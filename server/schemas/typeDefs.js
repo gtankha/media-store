@@ -18,6 +18,7 @@ const typeDefs = gql`
     bidderName: String
     bidValue: Float
     bidTimeStamp: String
+    sold:Boolean
   }
 
   type Order {

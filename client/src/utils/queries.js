@@ -17,6 +17,16 @@ query user($email:String) {
     
     
       messages
+      orders {
+        products 
+        {
+          
+                _id
+                
+              
+        }
+
+      }
     
   }
 }
@@ -37,6 +47,7 @@ query products($category: ID, $name: String){
             bidderName
             bidValue
             bidTimeStamp
+            sold
             category {
               _id
               name

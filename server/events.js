@@ -1,6 +1,6 @@
 const EventEmitter = require('eventemitter3');
 const emitter = new EventEmitter();
-const {Product,User} = require("./models");
+const {Product,User,Order} = require("./models");
 let   moment = require('moment'); // require
 
 
@@ -45,17 +45,20 @@ function subscribe(req, res) {
 	// Clear heartbeat and listener
 	req.on('close', function() {
 		clearInterval(hbt);
-		emitter.removeListener("UPDATE_PRODUCTS", onEvent);
+        emitter.removeListener("UPDATE_PRODUCTS", onEvent);
+        emitter.removeListener("UPDATE_MESSAGES", onEvent2);
 	});
 }
-
+// User.findOneAndUpdate({email:"marcobjj@gmail.com"}, { $set: { orders: [] }}, function(err, affected){
+//     console.log('affected: ', affected);
+// });
 
   function Find(){
  
-   Product.find()
+   Product.find({sold:false})
    .then(data=>{
    
-   const auctions = data.filter(product => {return product.bidTimeStamp != null} )
+   const auctions = data.filter(product => {return product.bidTimeStamp != null && product.sold == false} )
    auctions.forEach(prod => {
 
    const now = moment(); //todays date
@@ -69,8 +72,22 @@ function subscribe(req, res) {
     
   
     const message = `You won the action for ${prod.name} on ${moment(prod.bidTimeStamp).format('MMMM Do YYYY, h:mm:ss a')}`
-    console.log("id",prod._id,prod.name);
-    User.findOneAndUpdate({email:prod.bidderId}, { $addToSet: { "messages": message } }, { returnOriginal:false },
+    
+    
+    const products = [prod._id];
+
+    const order = new Order({products});
+
+    console.log("order is",order)
+    console.log(products)
+  
+    //await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+    User.findOneAndUpdate({email:prod.bidderId}, { $addToSet: { "orders": order} }, { returnOriginal:false })
+    .then(data=> console.log("new orders:",data))
+    .catch(err=> console.log("the error is",error))
+
+    User.findOneAndUpdate({email:prod.bidderId}, { $addToSet: { "messages": message} }, { returnOriginal:false },
+
     function (err, raw) {
         if (err) return handleError(err);
         console.log('The raw response from Mongo was ', raw);
@@ -79,18 +96,13 @@ function subscribe(req, res) {
 
      emitter.emit("UPDATE_MESSAGES",user_data,"UPDATE_MESSAGES");
 
-    Product.findOneAndDelete({_id:prod._id}, function (err, docs) { 
+    Product.findOneAndUpdate({_id:prod._id}, {$set:{sold:true}} )
 
-    if (err){ 
-        console.log(err) 
-    } 
-    else{ 
-        console.log("Deleted User : ", docs); 
-    } })
+   
     .then(product_data => {
         
 
-        Product.find()
+        Product.find({sold:false})
         .then(updated_products => {
        
         emitter.emit("UPDATE_PRODUCTS",updated_products ,"UPDATE_PRODUCTS");
@@ -106,7 +118,7 @@ function subscribe(req, res) {
    else if(expire > 0)
    {
 
-    Product.find()
+    Product.find({sold:false})
     .then(updated_products => {
     emitter.emit("UPDATE_PRODUCTS",updated_products ,"UPDATE_PRODUCTS");
     })

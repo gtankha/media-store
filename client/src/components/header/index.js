@@ -79,7 +79,7 @@ function Header () {
   useEffect(() => {
 
     if(message_data.data) {
-      console.log("messages:",message_data.data.user.messages.length)
+      console.log("products:",message_data.data.user)
       
 
       dispatch({

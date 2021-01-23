@@ -49,6 +49,12 @@ function Body() {
 
         let products = state.products;
 
+
+
+     
+
+        
+
         if(currentCategory) products = products.filter(product => product.category._id === currentCategory);
         if(currentSearch) products = products.filter(product => product.name.toLowerCase().includes(currentSearch.toLowerCase()));
 

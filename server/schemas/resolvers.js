@@ -9,6 +9,8 @@ const resolvers = {
       },
       products: async (parent, { category, name }) => {
         const params = {};
+
+        params.sold = false;
   
         if (category) {
           params.category = category;
@@ -28,15 +30,15 @@ const resolvers = {
       user: async (parent, {email}) => {
         console.log("email is",email)
           return await User.findOne({'email': email}
-          ).populate({
+           ).populate({
             path: 'orders.products',
             populate: 'category'
-          });
+           });
           
-          console.log(user)
+          
           //user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
   
-          //return user;
+         
         
   
        // throw new AuthenticationError('Not logged in');

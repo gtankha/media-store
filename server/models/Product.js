@@ -42,6 +42,11 @@ const productSchema = new Schema({
     type: String,
     required:false,
     trim:true
+  },
+  sold: {
+    type: Boolean,
+    required:false,
+    default: false
   }
 });
 

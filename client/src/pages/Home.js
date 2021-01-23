@@ -30,7 +30,8 @@ const Home = () => {
     const data = JSON.parse(evt.data);
     const type = evt.type;
 
-    console.log("messages emitted",data)
+    //alert(data.messages.products)
+    console.log(data.orders)
 
     //alert(evt.data)
 
