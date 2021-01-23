@@ -14,6 +14,11 @@ const typeDefs = gql`
     quantity: Int
     price: Float
     category: Category
+    bidderId: String
+    bidderName: String
+    bidValue: Float
+    bidTimeStamp: String
+    sold:Boolean
   }
 
   type Order {
@@ -28,6 +33,7 @@ const typeDefs = gql`
     lastName: String
     email: String
     orders: [Order]
+    messages:[String]
   }
 
   type Auth {
@@ -38,7 +44,7 @@ const typeDefs = gql`
     categories: [Category]
     products(category: ID, name: String): [Product]
     product(_id: ID!): Product
-    user: User
+    user(email:String): User
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
   }
@@ -47,7 +53,7 @@ const typeDefs = gql`
     addUser(firstName: String!, lastName: String!, email: String!): Auth
     addOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
+    updateProduct(_id: ID!, value: Float!, bidderId:String! , bidderName:String! , bidTimeStamp:String! ): Product
  
   }
 

@@ -9,6 +9,30 @@ query categories {
     }
   }`;
 
+export const QUERY_MESSAGES = gql`
+
+query user($email:String) {
+
+  user(email:$email) {
+    
+    
+      messages
+      orders {
+        products 
+        {
+          
+                _id
+                
+              
+        }
+
+      }
+    
+  }
+}
+
+`;
+
 
 export const QUERY_PRODUCTS = gql`
 query products($category: ID, $name: String){
@@ -20,6 +44,10 @@ query products($category: ID, $name: String){
             description
             image
             price
+            bidderName
+            bidValue
+            bidTimeStamp
+            sold
             category {
               _id
               name

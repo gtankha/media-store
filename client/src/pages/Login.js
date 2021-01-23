@@ -33,19 +33,8 @@ function Login(props) {
 
     console.log ('profile ooo  ' + Auth.isTokenExpired(id_token));
     Auth.login(id_token);
-    // console.log ('loading  :'  + loading);
+    console.log("auth profile",Auth.getProfile());
 
-    // const myPromise = new Promise(() => {
-    //    return (users);
-    // });
-
-    // console.log (myPromise);
-    
-    // const myPromise2 = myPromise.then((result) => 
-    //  { 
-      //  console.log ('result:  ' + result);
-     
-      // let input =  {firstName: res.profileObj.givenName, lastName: res.profileObj.familyName,  email: res.profileObj.email}
      console.log("I am here");
       const mutationResponse = addUser({
        variables: {firstName: res.profileObj.givenName, lastName: res.profileObj.familyName,  email: res.profileObj.email}

@@ -14,6 +14,9 @@ import store from "./redux/store";
 import OrderHistory from "./pages/OrderHistory";
 import Success from "./pages/Success"
 // import store from '../src/utils/store';
+import Messages from "./components/Messages";
+
+
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -24,7 +27,7 @@ const client = new ApolloClient({
       }
     })
   },
-  uri: 'http://localhost:3001/graphql',
+  uri: '/graphql',
 })
 
 
@@ -43,6 +46,7 @@ function App() {
               <Route exact path="/orderHistory" component={OrderHistory} />
               <Route exact path="/success" component={Success} />
               {/* <Route component={NoMatch} /> */}
+              <Route exact path="/messages" component={Messages} />
             </Switch>
            </Provider> 
         </div>

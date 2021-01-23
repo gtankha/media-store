@@ -20,6 +20,8 @@ const isLocalhost = Boolean(
   )
 );
 
+console.log("process.env",process.env)
+
 export function register(config) {
   if (
     process.env.NODE_ENV === 'production' &&

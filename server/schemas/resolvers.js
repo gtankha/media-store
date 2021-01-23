@@ -11,6 +11,8 @@ const resolvers = {
       },
       products: async (parent, { category, name }) => {
         const params = {};
+
+        params.sold = false;
   
         if (category) {
           params.category = category;
@@ -28,18 +30,30 @@ const resolvers = {
         return await Product.findById(_id).populate('category');
       },
       user: async (parent, args, context) => {
+        console.log ("abcdefg");
         console.log(context.user);
         if (context.user) {
           const email = await context.user;
+          console.log ("email is >>> " +  email);
           const user = await User.findOne({'email':email}).populate({
-            path: 'orders.products',
-            populate: 'category'
-          });
-  
-          user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-  
-          return user;
+             path: 'orders.products',
+             populate: 'category'
+             });
+             console.log ("user is ..." + user);
+            return user;
         }
+            
+
+      // user: async (parent, {email}) => {
+      //   console.log("email is",email)
+      //     return await User.findOne({'email': email}
+      //      ).populate({
+      //       path: 'orders.products',
+      //       populate: 'category'
+      //      });
+          
+          
+          //user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate)
   
         throw new AuthenticationError('Not logged in a');
       },
@@ -123,25 +137,6 @@ const resolvers = {
       return (isUser);
 
        };
-        //const token = signToken(user);
-        //  const user = await User.findOneAndUpdate (email,args, {
-        //  new: true,
-        //   upsert: true
-        // })
-
-        // const isUser = await find (args.email, async function (err,docs) {
-        //   console.log (docs);
-        //   if (!docs) {
-        //   const user = await User.create(args);
-        //   console.log ('user  '+ user);
-        //   return { user};
-        //   }
-        // })
-        //   const user = await User.findOneAndUpdate (args.email,args, {
-        //    new: true,
-        //    upsert: true
-        //  })
-
         
       },
       addOrder: async (parent, { products }, context) => {
@@ -169,10 +164,13 @@ const resolvers = {
   
         throw new AuthenticationError('Not logged in d');
       },
-      updateProduct: async (parent, { _id, quantity }) => {
-        const decrement = Math.abs(quantity) * -1;
-  
-        return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+      updateProduct: async (parent, { _id, value, bidderId, bidderName, bidTimeStamp }) => {
+
+        
+      await Product.findOneAndUpdate({_id:_id,bidValue:{$lt:value}},{bidValue:value,bidTimeStamp:bidTimeStamp,bidderName:bidderName,bidderId:bidderId}, { returnOriginal:false });
+      
+      return Product.find();
+       // return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
       }
       // login: async (parent, { email, password }) => {
       //   const user = await User.findOne({ email });
