@@ -1,7 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Product, Category, Order } = require('../models');
 const { findOneAndDelete, findOneAndUpdate } = require('../models/User');
-// const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -26,19 +25,21 @@ const resolvers = {
       product: async (parent, { _id }) => {
         return await Product.findById(_id).populate('category');
       },
-      user: async (parent, args, context) => {
-        if (context.user) {
-          const user = await User.findById(context.user._id).populate({
+      user: async (parent, {email}) => {
+        console.log("email is",email)
+          return await User.findOne({'email': email}
+          ).populate({
             path: 'orders.products',
             populate: 'category'
           });
+          
+          console.log(user)
+          //user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
   
-          user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+          //return user;
+        
   
-          return user;
-        }
-  
-        throw new AuthenticationError('Not logged in');
+       // throw new AuthenticationError('Not logged in');
       },
       order: async (parent, { _id }, context) => {
         if (context.user) {
@@ -95,32 +96,10 @@ const resolvers = {
       },
       updateProduct: async (parent, { _id, value, bidderId, bidderName, bidTimeStamp }) => {
 
-        // console.log("here")
-        // Product.findOne({_id:_id})
-        // .then(data => {
-          
-        //   console.log(data)
-        //   if(data.bid)
-        //   {
-        //     console.log(data.bid.value,value)
-        //     if(value > data.bid.value) {
-        //       const filter = { _id: _id };
-        //     const update = { bid:{value:value,name:"my name",_id:"q124"} };
-
-        //      Product.findOneAndUpdate(filter, update, {
-        //       new: true
-        //     })
-        //     .then(newdata => {  return newdata})
-        //     .catch(err => {console.log(err)})
-        //     }
-        //   }
         
-        // }
-          
-        //   )
-        
-      return await Product.findOneAndUpdate({_id:_id,bidValue:{$lt:value}},{bidValue:value,bidTimeStamp:bidTimeStamp,bidderName:bidderName,bidderId:bidderId}, { returnOriginal:false });
-
+      await Product.findOneAndUpdate({_id:_id,bidValue:{$lt:value}},{bidValue:value,bidTimeStamp:bidTimeStamp,bidderName:bidderName,bidderId:bidderId}, { returnOriginal:false });
+      
+      return Product.find();
        // return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
       }
       // login: async (parent, { email, password }) => {

@@ -29,9 +29,18 @@ function subscribe(req, res) {
         res.write(`event: UPDATE_PRODUCTS\n`);
         res.write(`type: ${type}\n`);
 		res.write(`data: ${JSON.stringify(data)}\n\n`);
+    };
+    
+    const onEvent2 = function(data,type) {
+        console.log("type",type)
+		res.write('retry: 500\n');
+        res.write(`event: UPDATE_MESSAGES\n`);
+        res.write(`type: ${type}\n`);
+		res.write(`data: ${JSON.stringify(data)}\n\n`);
 	};
 
-	emitter.on("UPDATE_PRODUCTS", onEvent);
+    emitter.on("UPDATE_PRODUCTS", onEvent);
+    emitter.on("UPDATE_MESSAGES", onEvent2);
 
 	// Clear heartbeat and listener
 	req.on('close', function() {
@@ -57,18 +66,18 @@ function subscribe(req, res) {
 
    if(expire <=0){
 
-    console.log("id",prod._id);
-
+    
+  
     const message = `You won the action for ${prod.name} on ${moment(prod.bidTimeStamp).format('MMMM Do YYYY, h:mm:ss a')}`
-
-    User.findOneAndUpdate({email:prod.bidderId}, { "$push": { "messages": message } }, { returnOriginal:false },
+    console.log("id",prod._id,prod.name);
+    User.findOneAndUpdate({email:prod.bidderId}, { $addToSet: { "messages": message } }, { returnOriginal:false },
     function (err, raw) {
         if (err) return handleError(err);
         console.log('The raw response from Mongo was ', raw);
     })
     .then(user_data => {
 
-   // emitter.emit('event',user_data,"UPDATE_USER");
+     emitter.emit("UPDATE_MESSAGES",user_data,"UPDATE_MESSAGES");
 
     Product.findOneAndDelete({_id:prod._id}, function (err, docs) { 
 
@@ -79,11 +88,11 @@ function subscribe(req, res) {
         console.log("Deleted User : ", docs); 
     } })
     .then(product_data => {
-        console.log(product_data);
+        
 
         Product.find()
         .then(updated_products => {
-        console.log(updated_products);
+       
         emitter.emit("UPDATE_PRODUCTS",updated_products ,"UPDATE_PRODUCTS");
         })
     
@@ -92,6 +101,15 @@ function subscribe(req, res) {
    })
 
    
+
+   }
+   else if(expire > 0)
+   {
+
+    Product.find()
+    .then(updated_products => {
+    emitter.emit("UPDATE_PRODUCTS",updated_products ,"UPDATE_PRODUCTS");
+    })
 
    }
 

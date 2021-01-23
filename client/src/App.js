@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import Cart from "./pages/Cart";
 import Header from "./components/header";
 import store from "./redux/store";
+import Messages from "./components/Messages"
 // import OrderHistory from "./pages/OrderHistory";
 // import Success from "./pages/Success"
 // import store from '../src/utils/store';
@@ -42,6 +43,7 @@ function App() {
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/cart" component={Cart} />
+              <Route exact path="/messages" component={Messages} />
             </Switch>
            </Provider> 
         </div>

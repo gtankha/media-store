@@ -9,6 +9,20 @@ query categories {
     }
   }`;
 
+export const QUERY_MESSAGES = gql`
+
+query user($email:String) {
+
+  user(email:$email) {
+    
+    
+      messages
+    
+  }
+}
+
+`;
+
 
 export const QUERY_PRODUCTS = gql`
 query products($category: ID, $name: String){

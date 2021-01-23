@@ -6,7 +6,7 @@ import { ADD_TO_CART,REMOVE_FROM_CART} from '../../utils/actions'
 import { useDispatch } from 'react-redux';
 import moment from 'moment'
 import {UPDATE_BID} from '../../utils/mutations';
-import React, { Component } from 'react';
+import React,{ useEffect } from 'react';
 //test
 function Product(prop) {
     const { _id, image, title, price, description, cart, bidTimeStamp, bidValue, bidderName } = prop;
@@ -16,10 +16,16 @@ function Product(prop) {
     const dispatch = useDispatch();
     const [updateProduct] = useMutation(UPDATE_BID);
 
-    const minBid = bidValue ? bidValue : Math.ceil(price / 3);
+    const minBid = bidValue +1;
+
+    let updateData = null;
+
+    useEffect(()=> {
 
     const timer = setInterval(updateTimeStamp,1000);
     let timeLeft = 0;
+
+    
     function updateTimeStamp(){
 
        
@@ -44,6 +50,7 @@ function Product(prop) {
        
         if(document.querySelector("#remainingTime"+_id)) document.querySelector("#remainingTime"+_id).textContent = hhmmss(expire);
     }
+    },[dispatch])
 
     function pad(num) {
         return ("0"+num).slice(-2);
@@ -91,16 +98,17 @@ function Product(prop) {
         }
 
 
-         mutationResponse ();
+          mutationResponse ();
 
-         window.location.reload();
+       
         
     }
 
      async function mutationResponse ()
     {
 
-        const value = document.querySelector("#bidInput"+_id).value;
+        let value = document.querySelector("#bidInput"+_id).value;
+        if(!value) value = minBid;
         console.log("value of bid",value,document.querySelector("#bidInput"+_id));
 
         if(!value || value <= bidValue) return;
@@ -123,7 +131,6 @@ function Product(prop) {
             }
           });
 
-         console.log("response",response)
     }
 
     const Container = styled.div`
