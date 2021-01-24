@@ -4,7 +4,8 @@ const CACHE_NAME = APP_PREFIX + VERSION
 const FILES_TO_CACHE = [
   "./index.html",
   "./index.css",
-  ".App.js"
+  ".App.js",
+  "./images/acMovie.jpg"
   
 ];
 
