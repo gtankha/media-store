@@ -1,5 +1,7 @@
-import React from "react";
-import { useMutation} from '@apollo/react-hooks';
+import React, { useState, useEffect } from "react";
+import { useMutation, useQuery } from '@apollo/react-hooks';
+//import { Link } from "react-router-dom";
+//import { LOGIN } from "../utils/mutations"
 import Auth from "../utils/auth";
 import { GoogleLogin } from 'react-google-login';
 // refresh token
@@ -18,7 +20,7 @@ function Login(props) {
     localStorage.setItem('firstName', res.profileObj.givenName);
     localStorage.setItem('lastName', res.profileObj.familyName);
     localStorage.setItem('id_token',id_token)
-    alert (res.profileObj.email);
+    Auth.login(id_token);
       const mutationResponse = addUser({
        variables: {firstName: res.profileObj.givenName, lastName: res.profileObj.familyName,  email: res.profileObj.email}
     });
