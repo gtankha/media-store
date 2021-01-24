@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 
+// This files contains the product detail information
 function Detail(prop)
 {
     const {image,title,price,description} = prop;

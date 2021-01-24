@@ -4,15 +4,20 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { Provider } from 'react-redux'
 import Home from "./pages/Home";
-// import Detail from "./pages/Detail";
-//import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import Cart from "./pages/Cart";
 import Header from "./components/header";
 import store from "./redux/store";
+<<<<<<< HEAD
 // import OrderHistory from "./pages/OrderHistory";
 // import Success from "./pages/Success"
+=======
+import OrderHistory from "./pages/OrderHistory";
+import Success from "./pages/Success"
+import Messages from "./components/Messages";
+
+
+>>>>>>> main
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -37,9 +42,12 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
+         
               <Route exact path="/cart" component={Cart} />
+              <Route exact path="/orderHistory" component={OrderHistory} />
+              <Route exact path="/success" component={Success} />
               {/* <Route component={NoMatch} /> */}
+              <Route exact path="/messages" component={Messages} />
             </Switch>
            </Provider> 
         </div>

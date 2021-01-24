@@ -1,15 +1,17 @@
 import gql from 'graphql-tag';
 
-// export const LOGIN = gql`
-//   mutation login($email: String!, $password: String!) {
-//     login(email: $email, password: $password) {
-//       token
-//       user {
-//         _id
-//       }
-//     }
-//   }
-// `;
+
+export const UPDATE_BID = gql`
+mutation updateProduct($_id:ID!,$value:Float!,$bidTimeStamp:String!,$bidderName:String!,$bidderId:String!){
+  updateProduct(_id:$_id,value:$value,bidTimeStamp:$bidTimeStamp,bidderName:$bidderName,bidderId:$bidderId){
+  bidValue
+  bidTimeStamp 
+  bidderId
+  name
+  _id
+  }
+}`;
+
 
 
 export const ADD_USER = gql`
@@ -17,6 +19,23 @@ export const ADD_USER = gql`
     addUser(firstName: $firstName, lastName: $lastName, email: $email) {
       user{
         _id
+      }
+    }
+  }
+`;
+export const ADD_ORDER = gql`
+  mutation addOrder($products: [ID]!) {
+    addOrder(products: $products) {
+      purchaseDate
+      products {
+        _id
+      name
+      description
+      price
+      quantity
+      category {
+        name
+      } 
       }
     }
   }

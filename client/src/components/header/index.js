@@ -1,28 +1,31 @@
 import styled, { css } from 'styled-components'
 import { Link, NavLink, Route} from "react-router-dom";
 import Nav from '../Nav'
-import { UPDATE_CATEGORIES,UPDATE_CURRENT_CATEGORY,UPDATE_CURRENT_SEARCH } from '../../utils/actions';
-import { QUERY_CATEGORIES } from '../../utils/queries';
+import { UPDATE_CATEGORIES,UPDATE_CURRENT_CATEGORY,UPDATE_CURRENT_SEARCH,UPDATE_MESSAGES } from '../../utils/actions';
+import { QUERY_CATEGORIES,QUERY_MESSAGES } from '../../utils/queries';
 import { useQuery } from '@apollo/react-hooks';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { idbPromise } from "../../utils/helpers";
 
+//  search functionality UI including the categories and message UI
+
 function Header () {
 
+
+    const email = localStorage.getItem('email');
 
     const H1 = styled.h1 `
     margin-left: 30px;
     `;
     const Input = styled.input`
     width: 55%;
-    height: 24px;
+    height: 100%;
     font-size:18px;
     border: 0px;
     border-right:0px; 
     border-left:0px; 
-    padding:0 10px;
-    outline: none;
+    outline:0px;
     `;
     const Container = styled.div`
     padding: 20px;
@@ -65,15 +68,32 @@ function Header () {
         return state
     });
     const dispatch = useDispatch();
-
     const { currentCategory,currentSearch } = state;
-
     const { loading, data } = useQuery(QUERY_CATEGORIES);
+     const message_data = useQuery(QUERY_MESSAGES,{variables:{email:email}})
+
+  useEffect(() => {
+
+    if(message_data.data && message_data.data.user) {
+      dispatch({
+        type: UPDATE_MESSAGES,
+        messages:  message_data.data.user.messages.reverse()
+    });
+
+    }
+
+  },[message_data.data,dispatch]);
+
 
     const SelectCategory = function (event) {
 
-        console.log(event.target.value);
+        const mySearch = document.querySelector("#searchInput").value;
         const _id = event.target.value;
+
+        dispatch({
+          type: UPDATE_CURRENT_SEARCH,
+          currentSearch: mySearch
+        });
 
         dispatch({
           type: UPDATE_CURRENT_CATEGORY,
@@ -85,7 +105,6 @@ function Header () {
     const Search = function (event) {
 
       const mySearch = document.querySelector("#searchInput").value;
-
       dispatch({
         type: UPDATE_CURRENT_SEARCH,
         currentSearch: mySearch
@@ -95,7 +114,7 @@ function Header () {
 
     useEffect(() => {
         if(data) {
-            console.log(data.categories)
+         
           dispatch({
             type: UPDATE_CATEGORIES,
             categories: data.categories
@@ -131,10 +150,11 @@ function Header () {
         ))}
         <option key="all123" value="">All</option>
         </Select>
-        <Input id="searchInput"></Input>
+        <Input id="searchInput" defaultValue={currentSearch}></Input>
         <SearchBtn onClick={Search} className="fa">&#xf002;</SearchBtn>
         </WrapBar>
         <Nav/>
+       
         </Container> 
 
     );

@@ -18,6 +18,9 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
+  messages: [{
+    type: String
+ }], 
   orders: [Order.schema]
 });
 

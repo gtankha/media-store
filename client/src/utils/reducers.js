@@ -9,6 +9,7 @@ import {
     ADD_MULTIPLE_TO_CART,
     REMOVE_FROM_CART,
     UPDATE_CART_QUANTITY,
+    UPDATE_MESSAGES,
     CLEAR_CART,
     
 } from './actions';
@@ -18,6 +19,7 @@ const initial = {
     products: [],
     cart: [],
     categories: [],
+    messages: [],
     currentCategory: '',
     currentSearch:''
   };
@@ -25,13 +27,18 @@ const initial = {
 
 export const reducer = (state=initial, action) => {
     switch (action.type) {
-        // if action type value is the value of `UPDATE_PRODUCTS`, return a new state object with an updated products array
+        case UPDATE_MESSAGES:
+            return {
+                ...state,
+                messages:action.messages
+            };
+       
         case UPDATE_PRODUCTS:
             return {
                 ...state,
                 products: [...action.products]
             };
-        // if action type value is the value of `UPDATE_CATEGORIES`, return a new state object with an updated categories array
+ 
         case UPDATE_CATEGORIES:
             return {
                 ...state,
@@ -61,10 +68,8 @@ export const reducer = (state=initial, action) => {
             };
         case REMOVE_FROM_CART:
             let newState = state.cart.filter(product => {
-                console.log("action id",action._id)
                 return product._id !== action._id;
             });
-            console.log("newState",newState)
             return {
                 ...state,
                 cart: newState
