@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment'
 import {UPDATE_BID} from '../../utils/mutations';
 import React,{ useEffect } from 'react';
-//test
+// auction bid 
 function Product(prop) {
     const { _id, image, title, price, description, cart, bidTimeStamp, bidValue, bidderName } = prop;
 
@@ -109,7 +109,7 @@ function Product(prop) {
 
         let value = document.querySelector("#bidInput"+_id).value;
         if(!value) value = minBid;
-        console.log("value of bid",value,document.querySelector("#bidInput"+_id));
+      
 
         if(!value || value <= bidValue) return;
 
@@ -118,8 +118,6 @@ function Product(prop) {
         const lastName = localStorage.getItem('lastName');
 
         const stamp = bidTimeStamp ? bidTimeStamp : moment().format();
-
-        console.log("stamp",stamp)
 
          const response = await updateProduct({
             variables: {

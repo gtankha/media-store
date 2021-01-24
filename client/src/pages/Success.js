@@ -6,25 +6,15 @@ import Jumbotron from "../components/Jumbotron";
 
 const Success = () => {
 
-    console.log("I am in success");
-    console.log()
-
     const [addOrder] = useMutation(ADD_ORDER);
 
     useEffect(() => {
         async function saveOrder() {
             const cart = await idbPromise('cart', 'get');
-            console.log("cartie cartie ");
-            console.log(cart);
             const products = cart.map(item => item._id);
             if (products.length) {
                 const { data } = await addOrder({ variables: { products } });
-                console.log("priduct id");
-                console.log(data);
                 const productData = data.addOrder.products;
-                console.log("priduct id 2");
-                console.log(productData);
-
                 productData.forEach((item) => {
                     idbPromise('cart', 'delete', item);
                 });

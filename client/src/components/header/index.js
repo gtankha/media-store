@@ -8,6 +8,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { idbPromise } from "../../utils/helpers";
 
+//  search functionality UI including the categories and message UI
+
 function Header () {
 
 
@@ -66,30 +68,17 @@ function Header () {
         return state
     });
     const dispatch = useDispatch();
-
     const { currentCategory,currentSearch } = state;
-
     const { loading, data } = useQuery(QUERY_CATEGORIES);
-
-
-     const message_data = useQuery(QUERY_MESSAGES,{variables:{email:email}});
-
-     console.log ('message data');
-     console.log (message_data);
-
-  
+     const message_data = useQuery(QUERY_MESSAGES,{variables:{email:email}})
 
   useEffect(() => {
 
     if(message_data.data) {
-      console.log("products:",message_data.data.user)
-      
-
       dispatch({
         type: UPDATE_MESSAGES,
         messages:  message_data.data.user.messages.reverse()
     });
-
 
     }
 
@@ -116,8 +105,6 @@ function Header () {
     const Search = function (event) {
 
       const mySearch = document.querySelector("#searchInput").value;
-      console.log("mySearch",mySearch)
-
       dispatch({
         type: UPDATE_CURRENT_SEARCH,
         currentSearch: mySearch
@@ -127,7 +114,7 @@ function Header () {
 
     useEffect(() => {
         if(data) {
-            console.log(data.categories)
+         
           dispatch({
             type: UPDATE_CATEGORIES,
             categories: data.categories

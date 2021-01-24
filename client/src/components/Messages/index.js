@@ -4,7 +4,7 @@ import { Link, NavLink, Route} from "react-router-dom";
 import styled, { css } from 'styled-components'
 import { useDispatch,useSelector } from 'react-redux';
 
-
+// Message functionality to communicate an auction win
 
 const Messages = function()
 {

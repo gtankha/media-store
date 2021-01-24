@@ -2,7 +2,6 @@ export function shortDescription(_string) {
 
    return  _string.length > 300 ?  _string.substring(0, 550) +"..." : _string ;
 
-
 }
 
 export function idbPromise(storeName, method, object) {
@@ -55,7 +54,6 @@ export function idbPromise(storeName, method, object) {
        store.delete(object._id);
        break;
      default:
-       console.log('No valid method');
        break;
    }
    // when the transaction is complete, close the connection

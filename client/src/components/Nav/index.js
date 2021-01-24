@@ -34,9 +34,7 @@ function Nav() {
 
   function showNavigation() {
     if (Auth.loggedIn()) {
-      console.log(email);
-      console.log(firstName);
-      console.log(lastName);
+    
      
       return (
         <UL className="flex-row">
@@ -85,7 +83,7 @@ function Nav() {
           <li className="mx-1">
           </li>
           
-          {console.log (window.location.pathname)}
+         
           {((window.location.pathname !== "/login")) &&
             <li className="mx-1">
               <NavLink to="/login">

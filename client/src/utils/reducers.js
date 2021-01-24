@@ -26,10 +26,7 @@ const initial = {
 
 
 export const reducer = (state=initial, action) => {
-    console.log("action",action)
     switch (action.type) {
-
-
         case UPDATE_MESSAGES:
             return {
                 ...state,
@@ -71,10 +68,8 @@ export const reducer = (state=initial, action) => {
             };
         case REMOVE_FROM_CART:
             let newState = state.cart.filter(product => {
-                console.log("action id",action._id)
                 return product._id !== action._id;
             });
-            console.log("newState",newState)
             return {
                 ...state,
                 cart: newState

@@ -16,7 +16,6 @@ function subscribe(req, res) {
 	// Heartbeat
 	const nln = function() {
         res.write('\n');
-        console.log("interval")
         Find();
 
         
@@ -24,7 +23,6 @@ function subscribe(req, res) {
 	const hbt = setInterval(nln, 5000);
 
 	const onEvent = function(data,type) {
-        console.log("type",type)
 		res.write('retry: 500\n');
         res.write(`event: UPDATE_PRODUCTS\n`);
         res.write(`type: ${type}\n`);
@@ -32,7 +30,6 @@ function subscribe(req, res) {
     };
     
     const onEvent2 = function(data,type) {
-        console.log("type",type)
 		res.write('retry: 500\n');
         res.write(`event: UPDATE_MESSAGES\n`);
         res.write(`type: ${type}\n`);
@@ -49,9 +46,6 @@ function subscribe(req, res) {
         emitter.removeListener("UPDATE_MESSAGES", onEvent2);
 	});
 }
-// User.findOneAndUpdate({email:"marcobjj@gmail.com"}, { $set: { orders: [] }}, function(err, affected){
-//     console.log('affected: ', affected);
-// });
 
   function Find(){
  
@@ -69,17 +63,9 @@ function subscribe(req, res) {
 
    if(expire <=0){
 
-    
-  
-    const message = `You won the action for ${prod.name} on ${moment(prod.bidTimeStamp).format('MMMM Do YYYY, h:mm:ss a')}`
-    
-    
+    const message = `You won the action for ${prod.name} on ${moment(prod.bidTimeStamp).format('MMMM Do YYYY, h:mm:ss a')}`;
     const products = [prod._id];
-
     const order = new Order({products});
-
-    console.log("order is",order)
-    console.log(products)
   
     //await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
     User.findOneAndUpdate({email:prod.bidderId}, { $addToSet: { "orders": order} }, { returnOriginal:false })
@@ -90,7 +76,6 @@ function subscribe(req, res) {
 
     function (err, raw) {
         if (err) return handleError(err);
-        console.log('The raw response from Mongo was ', raw);
     })
     .then(user_data => {
 
@@ -125,16 +110,8 @@ function subscribe(req, res) {
 
    }
 
-   
-
-   console.log("bidTimeStamp",now.format(),m,prod.bidTimeStamp,duration.asSeconds());
-
    })
    
    })
 }
-
-
-
-
 module.exports = { subscribe };

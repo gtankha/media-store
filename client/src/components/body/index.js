@@ -7,6 +7,8 @@ import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/react-hooks';
 import { idbPromise } from "../../utils/helpers";
 
+// This files contains content and UI logic for main part of the UI showing the product and the details
+
 function Body() {
 
     const state = useSelector((state) => {
@@ -44,8 +46,7 @@ function Body() {
 
 
     function filterProducts() {
-        console.log("state",state)
-        console.log("current category",currentCategory)
+      
 
         let products = state.products;
 
