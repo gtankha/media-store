@@ -67,11 +67,18 @@ function Body() {
     flex-direction:column;
     justify-content: center;
     margin-top:50px;
+    
+   
     `;
 
     const Wrapper = styled.div`
     display:flex;
     justify-content: center;
+
+    @media only screen and (max-width:1000px) {
+        width:100%;
+      
+    }
     `;
 
     return (

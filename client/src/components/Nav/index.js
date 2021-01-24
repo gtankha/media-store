@@ -24,10 +24,46 @@ function Nav() {
 
   const UL = styled.ul `
   list-style-type: none;
+ 
+  @media (max-width:1000px)
+  {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding-inline-start: 0px;
 
+  }
   `;
 
-  const SPAN = styled.ul`
+
+  const Li = styled.li `
+  
+  @media (max-width:1000px)
+  {
+    margin-left:0px;
+    margin-right:0px;
+    display:flex;
+    margin-top:5px;
+    border-bottom: 1px solid black;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+    padding:10px;
+    width:100px;
+    background-color:  #3B7EA1;
+    border-radius:20px;
+  }
+  @media (min-width:1001px)
+  {
+    margin-left:10px;
+  }
+  
+  `;
+
+
+
+  const SPAN = styled.span`
   color:#333;
   `;
 
@@ -38,13 +74,13 @@ function Nav() {
      
       return (
         <UL className="flex-row">
-          <li className="mx-1">
+          <Li className="mx-1">
             <NavLink to="/orderHistory">
               Orders
             </NavLink>
-          </li>
+          </Li>
 
-          <li className="mx-1">
+          <Li className="mx-1">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
 
 
@@ -68,9 +104,9 @@ function Nav() {
                 </GoogleLogout>
               }
             </a>
-          </li>
-          <li>  <NavLink to="/cart"><SPAN className="fa">&#xf291; ({cart.length})</SPAN></NavLink></li>
-          <li><NavLink to="/messages"><SPAN className="fa">&#xf674; ({messages.length})</SPAN></NavLink></li>
+          </Li>
+          <Li>  <NavLink to="/cart"><SPAN className="fa">&#xf291; ({cart.length})</SPAN></NavLink></Li>
+          <Li><NavLink to="/messages"><SPAN className="fa">&#xf674; ({messages.length})</SPAN></NavLink></Li>
 
         </UL>
 

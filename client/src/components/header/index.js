@@ -35,6 +35,11 @@ function Header () {
     align-items:center;
     justify-content:space-between;
     border-bottom: 1px solid #888;
+    @media (max-width:1000px) {
+      flex-direction:column;
+      padding:5px;
+      height:auto;
+    }
     `;
     const SearchBtn = styled.div`
     padding-top:3px;
@@ -54,6 +59,10 @@ function Header () {
     margin-left:20px;
     padding-left:5px;
     outline: none;
+    background: none;
+    @media (max-width:1000px) {
+      margin-left:0px; 
+  }
     `;
 
     const WrapBar = styled.div`
@@ -62,6 +71,10 @@ function Header () {
     border-radius: 20px 20px;
     display:flex;
     justify-content:space-between;
+    @media (max-width:1000px) {
+      width:95%; 
+      margin-top:10px;
+    }
     `;
 
     const state = useSelector((state) => {
@@ -139,14 +152,13 @@ function Header () {
     return (
         <Container>
         <NavLink to="/">
-        <span role="img" aria-label="shopping bag">🛍️</span>
-        Media Store
+     
+        <h2> <span role="img" aria-label="shopping bag">🛍️</span>Media Store</h2>
         </NavLink>
         <WrapBar>
         <Select onChange={SelectCategory} value={ currentCategory }>
         {state.categories.map(category=> ( 
             <option key={category._id} value={category._id}>{category.name}</option>
-
         ))}
         <option key="all123" value="">All</option>
         </Select>

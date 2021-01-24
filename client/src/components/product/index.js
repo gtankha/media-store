@@ -141,6 +141,11 @@ function Product(prop) {
     padding:5px;
     display:flex;
     justify-content:space-between;
+    @media (max-width:1000px) {
+        width:100%;
+        height:auto;
+        flex-direction:column;
+    }
     `;
     const Img = styled.div`
     height:200px;
@@ -148,14 +153,26 @@ function Product(prop) {
     background-image:url('images/${image}');
     background-repeat: no-repeat;
     background-size: cover;
+    @media (max-width:1000px) {
+        width:100%;
+        height:350px;
+    }
     `;
     const CardHead = styled.div`
     display:flex;
+    flex-direction:row;
     margin-top:6px;
+    @media (max-width:1000px) {
+        flex-direction:column;
+    }
+    `;
+    const Inner = styled.div`
+    display:flex;
     `;
     const CardBody = styled.div`
     display:flex;
     margin-top:20px;
+    width:100%;
     `;
     const Card = styled.div`
     border-top: 5px solid #FDB515;
@@ -163,15 +180,25 @@ function Product(prop) {
     flex-direction: column;
     margin-left:10px;
     width:80%;
+    @media (max-width:1000px) {
+        width:100%; 
+    }
     `;
     const H3 = styled.h3`
-    margin-left:30px;
     font-size:16px;
+    margin-left:15px;
+    @media (max-width:1000px) {
+        margin-left:0px; 
+    }
+
     `;
 
     const H4 = styled.h4`
-    margin-left:35px;
+    margin-left:15px;
     font-size:14px;
+    @media (max-width:1000px) {
+        margin-left:0px; 
+    }
     `;
 
     const BuyBtn = styled.button`
@@ -193,7 +220,6 @@ function Product(prop) {
     font-size:16px;
     border-radius: 20px;
     height: 20px;
- 
     margin-left:5px;
     outline:none;
     cursor:pointer;
@@ -228,13 +254,18 @@ function Product(prop) {
     if (cart === "no") {
         return (
             <Container>
-
+                
                 <Img />
+               
                 <Card>
                     <CardHead>
-                        <h5><b>{title}</b></h5><H3><b>${price}</b></H3><BuyBtn onClick={addToCart}>Buy Now</BuyBtn>
-                        <BidBtn onClick={placeBid}>Bid</BidBtn><Input id={"bidInput"+_id} placeholder={ minBid } step='1' min={minBid}></Input><span id={"remainingTime"+_id}></span> <H4 className="fa">&#xf201; {bidderName ? bidderName :""}</H4>
-
+                        <h5><b>{title}</b></h5>
+                        <Inner>
+                        <H3><b>${price}</b></H3><BuyBtn onClick={addToCart}>Buy</BuyBtn>
+                        <BidBtn onClick={placeBid}>Bid</BidBtn><Input id={"bidInput"+_id} placeholder={ minBid } step='1' min={minBid}></Input>
+                        </Inner>
+                        <Inner><span id={"remainingTime"+_id}></span> <H4 className="fa">&#xf201; {bidderName ? bidderName :""}</H4></Inner>
+                       
                     </CardHead>
                     <CardBody>
                         <p>{shortDescription(description)}</p>
