@@ -10,8 +10,8 @@ const Home = () => {
 
   useEffect(() => {
 
-    const evtSource = new EventSource('http://localhost:3001/events');
-    const evtSource2 = new EventSource('http://localhost:3001/events');
+    const evtSource = new EventSource('/events');
+    const evtSource2 = new EventSource('/events');
 
     evtSource2.addEventListener('UPDATE_MESSAGES', function (evt) {
 

@@ -74,7 +74,8 @@ function Header () {
 
   useEffect(() => {
 
-    if(message_data.data) {
+    if(message_data.data && message_data.data.user) {
+    
       dispatch({
         type: UPDATE_MESSAGES,
         messages:  message_data.data.user.messages.reverse()
