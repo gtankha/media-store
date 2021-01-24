@@ -69,26 +69,11 @@ const Home = () => {
   }
 
   return (
-<<<<<<< HEAD
-  
-    
-      <Body/>
-
-    
-
-    //    <div>
-    //           <GoogleLogout
-    //               clientId={clientId}
-    //               // buttonText="Logout"
-    //                onLogoutSuccess={console.log ("logged out")}
-    //             ></GoogleLogout>
-=======
 
 
     <Body />
 
 
->>>>>>> main
 
     //  </div>
   );

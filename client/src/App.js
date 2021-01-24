@@ -8,16 +8,11 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import Header from "./components/header";
 import store from "./redux/store";
-<<<<<<< HEAD
-// import OrderHistory from "./pages/OrderHistory";
-// import Success from "./pages/Success"
-=======
 import OrderHistory from "./pages/OrderHistory";
 import Success from "./pages/Success"
 import Messages from "./components/Messages";
 
 
->>>>>>> main
 
 const client = new ApolloClient({
   request: (operation) => {
