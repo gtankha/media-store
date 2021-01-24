@@ -18,13 +18,12 @@ function Login(props) {
     localStorage.setItem('firstName', res.profileObj.givenName);
     localStorage.setItem('lastName', res.profileObj.familyName);
     localStorage.setItem('id_token',id_token)
-    Auth.login(id_token);
+    alert (res.profileObj.email);
       const mutationResponse = addUser({
        variables: {firstName: res.profileObj.givenName, lastName: res.profileObj.familyName,  email: res.profileObj.email}
     });
     refreshTokenSetup(res);
   };
-
 
 
   const onFailure = (res) => {
