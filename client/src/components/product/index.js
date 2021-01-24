@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment'
 import {UPDATE_BID} from '../../utils/mutations';
 import React,{ useEffect } from 'react';
+import { idbPromise } from "../../utils/helpers";
 // auction bid 
 function Product(prop) {
     const { _id, image, title, price, description, cart, bidTimeStamp, bidValue, bidderName } = prop;
@@ -80,6 +81,9 @@ function Product(prop) {
     }
 
     const removeFromCart = function () {
+
+        const item = {_id: _id};
+        idbPromise('cart', 'delete', item);
 
         dispatch({
             type: REMOVE_FROM_CART,

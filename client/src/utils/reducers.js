@@ -70,6 +70,8 @@ export const reducer = (state=initial, action) => {
             let newState = state.cart.filter(product => {
                 return product._id !== action._id;
             });
+
+            
             return {
                 ...state,
                 cart: newState
