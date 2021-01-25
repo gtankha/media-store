@@ -5,6 +5,7 @@ const FILES_TO_CACHE = [
   "./index.html",
   "./index.css",
   "./App.js",
+  "./images/acMovie.jpg",
   "./images/assassinCreedOdyssey.jpg",
   "./images/assassinCreedOrigins.jpg",
   "./images/bloodborne.jpg",
