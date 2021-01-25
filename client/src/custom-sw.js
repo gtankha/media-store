@@ -5,8 +5,19 @@ const FILES_TO_CACHE = [
   "./index.html",
   "./index.css",
   ".App.js",
-  "./images/acMovie.jpg"
-  
+  "./images/acMovie.jpg",
+  "./images/assassinCreedOdyssey.jpg",
+  "./images/assassinCreedOrigins.jpg",
+  "./images/bloodborne.jpg",
+  "./images/darkSouls3.jpg",
+  "./images/haloFallOfReach.jpg",
+  "./images/haloMovie.jpg",
+  "./images/haloShadowsOfReach.jpg",
+  "./images/haloTheFlood.jpg",
+  "./images/mofia-III.jpg",
+  "./images/sekiro.jpg",
+  "./images/uncharted.jpg",
+  "./images/watchDogs2.jpg"
 ];
 
 // Respond with cached resources
