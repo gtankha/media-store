@@ -58,9 +58,19 @@ THEN I am logged out of  the website and presented the home page including searc
 ## Acceptance Criteria
 
 ## Screenshots
-![Movies](./movies.jpg)
-![Books](./books.jpg)
-![Games](./games.jpg) 
+https://user-images.githubusercontent.com/46304828/105649932-e6653680-5e66-11eb-8aac-e28163be4605.png
+
+https://user-images.githubusercontent.com/46304828/105650006-20363d00-5e67-11eb-81df-29354a6e3000.png
+
+https://user-images.githubusercontent.com/46304828/105650040-41972900-5e67-11eb-9198-c47443545ba1.png
+
+https://user-images.githubusercontent.com/46304828/105650060-55428f80-5e67-11eb-9ee2-f7c20dbf43bf.png
+
+https://user-images.githubusercontent.com/46304828/105650084-68edf600-5e67-11eb-8393-d5face09fe88.png"
+
+https://user-images.githubusercontent.com/46304828/105650104-786d3f00-5e67-11eb-9563-6ec97e000b4c.png
+
+https://user-images.githubusercontent.com/46304828/105650119-8cb13c00-5e67-11eb-8ae0-a655ff4c0a97.png
 
 ## Installation
  Application is deployed on Heroku. 
