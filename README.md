@@ -58,7 +58,7 @@ THEN I am logged out of  the website and presented the home page including searc
 ## Acceptance Criteria
 
 ## Screenshots
-(https://user-images.githubusercontent.com/46304828/105649932-e6653680-5e66-11eb-8aac-e28163be4605.png)
+![Screenshot](https://user-images.githubusercontent.com/46304828/105649932-e6653680-5e66-11eb-8aac-e28163be4605.png)
 
 https://user-images.githubusercontent.com/46304828/105650006-20363d00-5e67-11eb-81df-29354a6e3000.png
 
