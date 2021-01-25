@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import Product from '../product'
+import Product from '../Product'
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

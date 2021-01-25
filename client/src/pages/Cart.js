@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import Product from '../components/product'
+import Product from '../components/Product'
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { idbPromise } from "../utils/helpers";

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Body from '../components/body';
+import Body from '../components/Body';
 import { useDispatch } from 'react-redux';
 const clientId = '900972042486-ho4224klutu5ot121jh6nao4d2tnfp8q.apps.googleusercontent.com';
 let prevUpdate = null;

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
-import Header from "./components/header";
+import Header from "./components/Header";
 import store from "./redux/store";
 import OrderHistory from "./pages/OrderHistory";
 import Success from "./pages/Success"
