@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.6e9a6d0383450d5ec816f616a21d48a1.js"
+  "/precache-manifest.7048ddc63cbf0e628e7dfa7c7a0a2cad.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -42,9 +42,20 @@ const VERSION = 'version_01';
 const CACHE_NAME = APP_PREFIX + VERSION
 const FILES_TO_CACHE = [
   "./index.html",
-  "./build/images/acMovie.jpg",
-  "./build/images/assassinCreedOdyssey.jpg"
-  
+  "./index.css",
+  "./App.js",
+  "./images/assassinCreedOdyssey.jpg",
+  "./images/assassinCreedOrigins.jpg",
+  "./images/bloodborne.jpg",
+  "./images/darkSouls3.jpg",
+  "./images/haloFallOfReach.jpg",
+  "./images/haloMovie.jpg",
+  "./images/haloShadowsOfReach.jpg",
+  "./images/haloTheFlood.jpg",
+  "./images/mofia-III.jpg",
+  "./images/sekiro.jpg",
+  "./images/uncharted.jpg",
+  "./images/watchDogs2.jpg"
 ];
 
 // Respond with cached resources
